@@ -4,7 +4,10 @@ import company.abstracts.Employee;
 import company.models.Manager;
 import company.models.Worker;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,9 +21,7 @@ public class Main {
 
         ArrayList<Employee> employees = new ArrayList<Employee>();
 
-        for (Employee employee : employeesArray) {
-            employees.add(employee);
-        }
+        Collections.addAll(employees, employeesArray);
 
         employees.forEach(employee -> {
             employee.work();
@@ -50,7 +51,47 @@ public class Main {
                     employee.getName(),
                     hashCode);
             System.out.println(employeeMessage);
+
+            employees.add(employee);
         }
+
+        System.out.println("============================================");
+
+        double salarySum = 0.0;
+        double workersSum = 0.0;
+        double managersSum = 0.0;
+        ArrayList<Employee> duplicatedEmployees = new ArrayList<Employee>();
+        for(Employee employee : employees) {
+            salarySum += employee.getSalary();
+
+            if(employee instanceof Worker) {
+                workersSum += employee.getSalary();
+            }
+
+            if(employee instanceof Manager) {
+                managersSum += employee.getSalary();
+            }
+
+            employees.forEach(e -> {
+                System.out.println(employee.getName() + " " + e.getName() + " " + e.equals(employee) + employees.indexOf(e) + " " + employees.indexOf(employee));
+                if(employee.getName().equals("worker duplicated")) {
+                    System.out.println(employee.equals(e));
+                    System.out.println(employees.indexOf(e));
+                    employees.indexOf(employee);
+                }
+
+               if(employee.equals(e) && employees.indexOf(e) != employees.indexOf(employee)) {
+                   duplicatedEmployees.add(e);
+               }
+            });
+        }
+
+
+        System.out.println("Employees salaries sum: " + salarySum + " RSD");
+        System.out.println("Workers salaries sum: " + workersSum + " BAM");
+        System.out.println("Managers salaries sum: " + managersSum + " KN");
+
+        duplicatedEmployees.forEach(employee -> System.out.println("Duplicated Employee: " + employee.getName() + "With Id:" + employee.hashCode()));
     }
 
     public static String getEqualString(boolean equal) {
