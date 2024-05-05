@@ -71,21 +71,24 @@ public class Main {
             if(employee instanceof Manager) {
                 managersSum += employee.getSalary();
             }
-
-            employees.forEach(e -> {
-                System.out.println(employee.getName() + " " + e.getName() + " " + e.equals(employee) + employees.indexOf(e) + " " + employees.indexOf(employee));
-                if(employee.getName().equals("worker duplicated")) {
-                    System.out.println(employee.equals(e));
-                    System.out.println(employees.indexOf(e));
-                    employees.indexOf(employee);
-                }
-
-               if(employee.equals(e) && employees.indexOf(e) != employees.indexOf(employee)) {
-                   duplicatedEmployees.add(e);
-               }
-            });
         }
 
+        for(int firstEmployeeIndex = 0; firstEmployeeIndex < employees.size(); firstEmployeeIndex++) {
+            Employee currentEmployee = employees.get(firstEmployeeIndex);
+            int firstHashCode = currentEmployee.hashCode();
+
+            for(int secondEmployeeIndex = 0; secondEmployeeIndex < employees.size(); secondEmployeeIndex++) {
+                if(firstEmployeeIndex != secondEmployeeIndex) {
+                    Employee secondEmployee = employees.get(secondEmployeeIndex);
+                    int secondHashCode = secondEmployee.hashCode();
+
+                    if(firstHashCode == secondHashCode) {
+                        duplicatedEmployees.add(secondEmployee);
+                    }
+                }
+            }
+
+        }
 
         System.out.println("Employees salaries sum: " + salarySum + " RSD");
         System.out.println("Workers salaries sum: " + workersSum + " BAM");
