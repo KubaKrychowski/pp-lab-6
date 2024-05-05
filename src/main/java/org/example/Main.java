@@ -10,7 +10,7 @@ public class Main {
                 new Worker("worker 1", 21.73, 1),
                 new Worker("worker 2", 11.09, 2),
                 new Worker("worker 3", 40.02, 3),
-                new Worker("worker 4", 01.03, 4), // Poprawiłem nazwę i zaktualizowałem wartość
+                new Worker("worker 4", 01.03, 4), 
                 new Manager("manager", 19.92, 5)
         };
 
